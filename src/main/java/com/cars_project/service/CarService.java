@@ -33,27 +33,15 @@ public class CarService {
         return carRepository.findAll(pageable);
     }
 
-    public Optional<Car> updateCar(long id, Car newCar) {
+    public Optional<Car> updateCar(long id, Car updatedCar) {
         Optional<Car> optionalCar = carRepository.findById(id);
 
         if(optionalCar.isPresent()){
             Car car = optionalCar.get();
-            // Update fields with updated values
-            car.setColor(newCar.getColor());
-            car.setAvailability(newCar.isAvailability());
-            car.setManufacturer(newCar.getManufacturer());
-            car.setModel(newCar.getModel());
-            car.setLicensePlateNumber(newCar.getLicensePlateNumber());
-            car.setRentalRate(newCar.getRentalRate());
-            car.setYear(newCar.getYear());
-
-            // Fields with foreign key
-            car.setCustomer(newCar.getCustomer());
-            car.setCarDetails(newCar.getCarDetails());
-            car.setReservations(newCar.getReservations());
+            update(car, updatedCar);
 
             // Save the updated car in the repository
-            return Optional.of(carRepository.save(optionalCar.get()));
+            return Optional.of(carRepository.save(car));
         }
         return Optional.empty();
     }
@@ -64,5 +52,21 @@ public class CarService {
         // check if car with that id exists, then delete it
         optionalCar.ifPresent(carRepository::delete);
         return optionalCar;
+    }
+
+    private void update(Car car, Car updatedCar){
+        // Update fields with updated values
+        car.setColor(updatedCar.getColor());
+        car.setAvailability(updatedCar.isAvailability());
+        car.setManufacturer(updatedCar.getManufacturer());
+        car.setModel(updatedCar.getModel());
+        car.setLicensePlateNumber(updatedCar.getLicensePlateNumber());
+        car.setRentalRate(updatedCar.getRentalRate());
+        car.setYear(updatedCar.getYear());
+
+        // Fields with foreign key
+        car.setCustomer(updatedCar.getCustomer());
+        car.setCarDetails(updatedCar.getCarDetails());
+        car.setReservations(updatedCar.getReservations());
     }
 }
