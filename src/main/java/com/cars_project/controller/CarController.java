@@ -4,9 +4,11 @@ import com.cars_project.model.Car;
 import com.cars_project.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @RestController
@@ -44,4 +46,10 @@ public class CarController {
         return carService.deleteCustomer(id);
     }
 
+    @GetMapping("/cars/{carId}/rental-price")
+    public double calculateRentalPrice(@PathVariable long carId,
+                                       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        return carService.calculateRentalPrice(carId, startDate, endDate);
+    }
 }

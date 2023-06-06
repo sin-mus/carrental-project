@@ -58,4 +58,8 @@ public class CustomerService {
         optionalCustomer.ifPresent(customerRepository::delete);
         return optionalCustomer;
     }
+
+    public Optional<Customer> createCustomer(Customer customer) {
+        return Optional.of(customerRepository.save(customer));
+    }
 }

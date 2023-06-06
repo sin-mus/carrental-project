@@ -26,7 +26,11 @@ public class CustomerController {
     public Optional<Customer> getCustomer(@PathVariable long id){
         return customerService.getCustomer(id);
     }
-    @PostMapping("/{id}/update")
+    @PostMapping("/create")
+    public Optional<Customer> createCustomer(@RequestBody Customer customer){
+        return customerService.createCustomer(customer);
+    }
+    @PutMapping("/{id}/update")
     public ResponseEntity<Optional<Customer>> updateCustomer(@PathVariable long id, @RequestBody Customer customer){
         Optional<Customer> optionalCustomer = customerService.updateCustomer(id, customer);
         if (optionalCustomer.isPresent()){

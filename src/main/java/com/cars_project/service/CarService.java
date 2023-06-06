@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,5 +70,22 @@ public class CarService {
         car.setCustomer(updatedCar.getCustomer());
         car.setCarDetails(updatedCar.getCarDetails());
         car.setReservations(updatedCar.getReservations());
+    }
+
+    public double calculateRentalPrice(long carId, LocalDate startDate, LocalDate endDate) {
+        Car car = carRepository.findById(carId).orElse(null);
+        if (car != null) {
+            int rentalDays = calculateRentalDays(startDate, endDate);
+            double basePrice = car.getRentalRate();
+            double totalPrice = basePrice * rentalDays;
+            // Additional calculations or discounts can be applied here
+            return totalPrice;
+        } else {
+            throw new IllegalStateException("Didn't find car with id: " + carId);
+        }
+    }
+    private int calculateRentalDays(LocalDate startDate, LocalDate endDate) {
+        // Implement logic to calculate the number of rental days
+        return (int) ChronoUnit.DAYS.between(startDate, endDate);
     }
 }
