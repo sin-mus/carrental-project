@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("reservations")
+@RequestMapping("/reservations")
 @RequiredArgsConstructor
 public class ReservationController {
     private final ReservationService reservationService;
@@ -30,5 +30,9 @@ public class ReservationController {
     @PutMapping("/{id}/update")
     public Optional<Reservation> updateReservation(@PathVariable long id, @RequestBody Reservation reservation){
         return reservationService.updateReservation(id, reservation);
+    }
+    @DeleteMapping("/{id}/delete")
+    public Optional<Reservation> deleteReservation(@PathVariable long id){
+        return reservationService.deleteReservation(id);
     }
 }

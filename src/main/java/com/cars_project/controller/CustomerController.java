@@ -3,19 +3,17 @@ package com.cars_project.controller;
 import com.cars_project.model.Customer;
 import com.cars_project.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("customers")
+@RequestMapping("/customers")
 @RequiredArgsConstructor
 public class CustomerController {
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @GetMapping
     public Page<Customer> getCustomers(@RequestParam(defaultValue = "0") int pageNumber,

@@ -6,12 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,10 +19,6 @@ public class CarService {
 
     public Car createCar(Car car){
         return carRepository.save(car);
-    }
-
-    public List<Car> getAllCars() {
-        return carRepository.findAll();
     }
 
     public Optional<Car> getCarById(long id) {
@@ -48,7 +42,7 @@ public class CarService {
         return Optional.empty();
     }
 
-    public Optional<Car> deleteCustomer(Long id) {
+    public Optional<Car> deleteCar(Long id) {
         Optional<Car> optionalCar = carRepository.findById(id);
 
         // check if car with that id exists, then delete it
@@ -77,9 +71,8 @@ public class CarService {
         if (car != null) {
             int rentalDays = calculateRentalDays(startDate, endDate);
             double basePrice = car.getRentalRate();
-            double totalPrice = basePrice * rentalDays;
             // Additional calculations or discounts can be applied here
-            return totalPrice;
+            return basePrice * rentalDays;
         } else {
             throw new IllegalStateException("Didn't find car with id: " + carId);
         }
