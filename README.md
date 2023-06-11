@@ -1,1 +1,2 @@
-# car-tracking-spring-backend
+# Car Rental Project
+
