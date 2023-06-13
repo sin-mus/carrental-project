@@ -18,8 +18,9 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/cars")
+@RequestMapping("/api/cars")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class CarController {
     private final CarService carService;
 

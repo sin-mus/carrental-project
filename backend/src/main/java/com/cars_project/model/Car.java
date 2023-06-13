@@ -32,6 +32,9 @@ public class Car {
     @NotNull
     @NotBlank(message = "license plate number is mandatory")
     private String licensePlateNumber;
+    @NotNull
+    @NotBlank(message = "Image Url is mandatory")
+    private String imageUrl;
     @Min(value = 0)
     private int rentalRate;
     @Min(value = 1995)

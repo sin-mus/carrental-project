@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/api/customers")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class CustomerController {
     private final CustomerService customerService;
 
