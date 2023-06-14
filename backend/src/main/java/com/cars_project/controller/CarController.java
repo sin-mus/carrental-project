@@ -7,6 +7,7 @@ import com.cars_project.service.CarService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,9 +50,15 @@ public class CarController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Car>> getCars(@RequestParam(defaultValue = "0") int pageNumber,
-                                             @RequestParam(defaultValue = "10") int pageSize) {
-        Page<Car> cars = carService.getCars(pageNumber, pageSize);
+    public ResponseEntity<Page<Car>> getCars(Pageable pageable) {
+        Page<Car> cars = carService.getCars(pageable);
+        return ResponseEntity.ok(cars);
+    }
+
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<Car>> getCarsByManufacturer(@RequestParam("manufacturer") String manufacturer, Pageable pageable) {
+        Page<Car> cars = carService.getCarsByManufacturer(manufacturer, pageable);
         return ResponseEntity.ok(cars);
     }
 

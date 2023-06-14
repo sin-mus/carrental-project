@@ -18,7 +18,7 @@ public class CustomerController {
 
     @GetMapping
     public Page<Customer> getCustomers(@RequestParam(defaultValue = "0") int pageNumber,
-                                       @RequestParam(defaultValue = "10") int pageSize){
+                                       @RequestParam(defaultValue = "6") int pageSize){
         return customerService.getCustomers(pageNumber, pageSize);
     }
     @GetMapping("/{id}")

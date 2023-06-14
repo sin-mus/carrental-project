@@ -26,21 +26,22 @@ public class Car {
     @NotNull
     @NotBlank(message = "model is mandatory")
     private String model;
-    @NotNull
-    @NotBlank(message = "color is mandatory")
-    private String color;
-    @NotNull
-    @NotBlank(message = "license plate number is mandatory")
-    private String licensePlateNumber;
-    @NotNull
-    @NotBlank(message = "Image Url is mandatory")
-    private String imageUrl;
     @Min(value = 0)
     private int rentalRate;
     @Min(value = 1995)
     private int year;
-    @Column(name = "availability", columnDefinition = "boolean default true")
-    private boolean availability;
+    @NotNull
+    @NotBlank(message = "Image Url is mandatory")
+    private String imageUrl;
+    @NotNull
+    @NotBlank(message = "Fuel is mandatory")
+    private String fuel;
+    @NotNull
+    @NotBlank(message = "Gearbox is mandatory")
+    private String gearbox;
+
+
+    private int seats;
 
     @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn

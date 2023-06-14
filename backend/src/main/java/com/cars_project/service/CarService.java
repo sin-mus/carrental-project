@@ -24,8 +24,7 @@ public class CarService {
     public Optional<Car> getCarById(long id) {
         return carRepository.findById(id);
     }
-    public Page<Car> getCars(int pageNumber, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+    public Page<Car> getCars(Pageable pageable) {
         return carRepository.findAll(pageable);
     }
 
@@ -52,13 +51,14 @@ public class CarService {
 
     private void update(Car car, Car updatedCar){
         // Update fields with updated values
-        car.setColor(updatedCar.getColor());
-        car.setAvailability(updatedCar.isAvailability());
         car.setManufacturer(updatedCar.getManufacturer());
         car.setModel(updatedCar.getModel());
-        car.setLicensePlateNumber(updatedCar.getLicensePlateNumber());
         car.setRentalRate(updatedCar.getRentalRate());
         car.setYear(updatedCar.getYear());
+        car.setFuel(updatedCar.getFuel());
+        car.setGearbox(updatedCar.getGearbox());
+        car.setSeats(updatedCar.getSeats());
+        car.setImageUrl(updatedCar.getImageUrl());
 
         // Fields with foreign key
         car.setCustomer(updatedCar.getCustomer());
@@ -80,5 +80,9 @@ public class CarService {
     private int calculateRentalDays(LocalDate startDate, LocalDate endDate) {
         // Implement logic to calculate the number of rental days
         return (int) ChronoUnit.DAYS.between(startDate, endDate);
+    }
+
+    public Page<Car> getCarsByManufacturer(String manufacturer, Pageable pageable) {
+        return carRepository.findByManufacturerContaining(manufacturer, pageable);
     }
 }
