@@ -3,6 +3,8 @@
 }
 
 .sidenav {
+  color: white;
+  background: #EF7C8E;
   width: 200px;
 }
 
@@ -14,4 +16,23 @@
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.mat-toolbar button{
+  margin: 0 10px;
+}
+
+.title-heading{
+  justify-content: center;
+}
+.side_nav_item{
+  text-align: center;
+  margin: 10px 0;
+}
+.tiny-block{
+  color: initial;
+  margin: 0 auto;
+  height: 1px;
+  width: 80%;
+  border-bottom: 1px solid white;
 }

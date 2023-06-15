@@ -7,11 +7,39 @@
   [mode]="(isHandset$ | async) ? 'over' : 'side'"
   [opened]="(isHandset$ | async) === false">
 
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar class="title-heading">
+      SINANOVIC
+    </mat-toolbar>
+
+    <div class="tiny-block">
+    </div>
+
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item class="side_nav_item" href="#">
+        <i class="fa-solid fa-car" style="margin: 0 5px;"></i>
+        Cars
+      </a>
+      <a mat-list-item class="side_nav_item" href="#">
+        <i class="fa-solid fa-users" style="margin: 0 5px;"></i>
+        Customers
+      </a>
+      <a mat-list-item class="side_nav_item" href="#">
+        <i class="fa-solid fa-calendar-check" style="margin: 0 5px;"></i>
+        Reservations
+      </a>
+      <a mat-list-item class="side_nav_item" href="#">
+        <i class="fa-regular fa-newspaper" style="margin: 0 5px;"></i>
+        News
+      </a>
+      <a mat-list-item class="side_nav_item" href="#">
+        <i class="fa-solid fa-file-signature" style="margin: 0 5px;"></i>
+        Terms Of Use
+      </a>
+      <a mat-list-item class="side_nav_item" href="#">
+        <i class="fa-regular fa-address-book" style="margin: 0 5px;"></i>
+        Contact
+      </a>
+      <a mat-list-item class="side_nav_item" href="#">Reservations</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -24,11 +52,17 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>frontend</span>
+      <span>SINANOVIC</span>
+
+      <button mat-raised-button color="accent">
+        <mat-icon>home</mat-icon>
+        Home
+      </button>
+
     </mat-toolbar>
     <!-- Add Content Here -->
 
-    <ng-content></ng-content>
+    
     
   </mat-sidenav-content>
 </mat-sidenav-container>
