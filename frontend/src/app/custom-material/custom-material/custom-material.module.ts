@@ -55,7 +55,7 @@ export const MY_FORMATS = {
     MatAutocompleteModule, MatTableModule, MatDialogModule, MatTabsModule,
     MatTooltipModule, MatSelectModule, MatPaginatorModule, MatChipsModule,
     MatButtonToggleModule, MatSlideToggleModule, MatBadgeModule, MatCheckboxModule,
-    MatExpansionModule, DragDropModule, MatSortModule
+    MatExpansionModule, DragDropModule, MatSortModule, MatGridListModule
   ],
   exports: [
     CommonModule,
@@ -65,7 +65,7 @@ export const MY_FORMATS = {
     MatAutocompleteModule, MatTableModule, MatDialogModule, MatTabsModule,
     MatTooltipModule, MatSelectModule, MatPaginatorModule, MatChipsModule,
     MatButtonToggleModule, MatSlideToggleModule, MatBadgeModule, MatCheckboxModule,
-    MatExpansionModule, DragDropModule, MatSortModule
+    MatExpansionModule, DragDropModule, MatSortModule, MatGridListModule
   ],
   providers: [
     {

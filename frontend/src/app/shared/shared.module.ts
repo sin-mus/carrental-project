@@ -5,11 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LayoutComponent } from './layout/layout.component';
 import { CustomMaterialModule } from '../custom-material/custom-material/custom-material.module';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
     imports: [
         RouterModule,
         CustomMaterialModule,
+        ComponentsModule,
         FormsModule,
         ReactiveFormsModule,
         FlexLayoutModule,
@@ -21,7 +23,8 @@ import { CustomMaterialModule } from '../custom-material/custom-material/custom-
         FormsModule,
         ReactiveFormsModule,
         FlexLayoutModule,
-        CustomMaterialModule
+        CustomMaterialModule,
+        ComponentsModule
     ]
 })
 export class SharedModule { }

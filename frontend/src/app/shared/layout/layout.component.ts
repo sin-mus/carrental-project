@@ -16,6 +16,7 @@ export class LayoutComponent {
   @ViewChild('sidenav', { static: true }) sidenav: MatSidenav;
   searchTerm: string;
   toggleSearch: boolean = false;
+  test : Date = new Date();
 
 
   constructor(private observer: BreakpointObserver, 
