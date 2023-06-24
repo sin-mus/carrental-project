@@ -14,14 +14,10 @@ import { delay, filter } from 'rxjs';
 export class LayoutComponent {
 
   @ViewChild('sidenav', { static: true }) sidenav: MatSidenav;
-  searchTerm: string;
-  toggleSearch: boolean = false;
-  test : Date = new Date();
 
-
-  constructor(private observer: BreakpointObserver, 
+  constructor(private observer: BreakpointObserver,
     private router: Router,
-    private cdref: ChangeDetectorRef) {}
+    private cdref: ChangeDetectorRef) { }
 
   ngAfterViewInit() {
     this.observer
@@ -29,7 +25,6 @@ export class LayoutComponent {
       .pipe(delay(1), untilDestroyed(this))
       .subscribe((res) => {
         if (res.matches) {
-          console.log(this);
           this.sidenav.mode = 'over';
           this.sidenav.close();
         } else {
@@ -49,8 +44,7 @@ export class LayoutComponent {
         }
       });
 
-      this.cdref.detectChanges();
+
   }
-    
 }
 

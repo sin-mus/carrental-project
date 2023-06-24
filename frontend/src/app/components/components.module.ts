@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
-
-import { ImageSliderComponent } from './image-slider/image-slider.component';
-
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -12,14 +10,13 @@ import { ImageSliderComponent } from './image-slider/image-slider.component';
   imports: [
     CommonModule,
     RouterModule,
+    NgChartsModule
   ],
   declarations: [
-    FooterComponent,
-    ImageSliderComponent
+    FooterComponent
   ],
   exports: [
-    FooterComponent,
-    ImageSliderComponent
+    FooterComponent
   ]
 })
 export class ComponentsModule { }

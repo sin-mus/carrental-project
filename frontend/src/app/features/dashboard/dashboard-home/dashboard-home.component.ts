@@ -1,5 +1,9 @@
-import { Component, Output } from '@angular/core';
-import { SlideInterface } from 'src/app/components/image-slider/types/slide.interface';
+import { AfterViewInit, Component } from '@angular/core';
+import { CarsService } from 'src/app/services/cars.service';
+import { HeaderService } from 'src/app/shared/header/header.service';
+import { SmallGrid } from '../types/small-grid.interface';
+import { CustomersService } from 'src/app/services/customers.service';
+import { ReservationsService } from 'src/app/services/reservations.service';
 
 export interface Tile {
   color: string;
@@ -13,26 +17,75 @@ export interface Tile {
   templateUrl: './dashboard-home.component.html',
   styleUrls: ['./dashboard-home.component.css']
 })
-export class DashboardHomeComponent {
+export class DashboardHomeComponent implements AfterViewInit {
 
-  images = [700, 533, 807, 124].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  title: string = "Home";
+  smallGridLayout: SmallGrid[];
 
-  currentUser: any = {
-    name: "Mustafa"
+  constructor(
+    private headerService: HeaderService,
+    private carService: CarsService,
+    private customersService: CustomersService,
+    private reservationsService: ReservationsService
+  ) {
+    this.smallGridLayout = [
+      {
+        icon: "fa-solid fa-car",
+        category: "Cars In Operation",
+        title: `${this.getCarsInOperation()}/${this.getTotalNumberOfCars()}`,
+        warningIcon: "fa-sharp fa-solid fa-thumbtack",
+        link: "cars/running",
+        linkText: "Check running cars...",
+        color: "#FFA41B"
+      },
+      {
+        icon: "fa-sharp fa-solid fa-note-sticky",
+        category: "Upcoming Reservations",
+        title: `${this.getUpcomingReservations()}`,
+        warningIcon: "fa-sharp fa-solid fa-thumbtack",
+        link: "reservations/upcoming",
+        linkText: "Check upcoming reservations..."
+        ,
+        color: "#F86F03"
+      },
+      {
+        icon: "fa-solid fa-person-circle-xmark",
+        category: "Customers With Missing Data",
+        title: `${this.getNumberOfCustomersWithMissingData()}`,
+        warningIcon: "fa-sharp fa-solid fa-thumbtack",
+        link: "customers/missing",
+        linkText: "Check customers with missing data...",
+        color: "#FF0060"
+      },
+      {
+        icon: "fa-sharp fa-solid fa-flag",
+        category: "Notifications",
+        title: `${this.getNumberOfNotifications()}`,
+        warningIcon: "fa-sharp fa-solid fa-thumbtack",
+        link: "notifications",
+        linkText: "Check notifications...",
+        color: "#00DFA2"
+      }
+    ]
   }
-
-  tiles: Tile[] = [
-    { text: 'One', cols: 3, rows: 1, color: 'lightblue' },
-    { text: 'Two', cols: 1, rows: 2, color: 'lightgreen' },
-    { text: 'Three', cols: 1, rows: 1, color: 'lightpink' },
-    { text: 'Four', cols: 2, rows: 1, color: '#DDBDF1' },
-  ];
-
-  slides: SlideInterface[] = [
-    { url: this.images[0], title: 'Mustafa' },
-    { url: this.images[1], title: 'Mustafa' },
-    { url: this.images[2], title: 'Mustafa' },
-    { url: this.images[3], title: 'Mustafa' },
-    { url: this.images[4], title: 'Mustafa' }
-  ]
+  
+  ngAfterViewInit(): void {
+    this.headerService.changeHeaderTitle(this.title);
+  }
+ 
+  getCarsInOperation(): number {
+    return this.carService.getCarsInOperation();
+  }
+  getTotalNumberOfCars(): number {
+    return this.carService.getTotalNumberOfCars();
+  }
+  getNumberOfCustomersWithMissingData(): number {
+    return this.customersService.getNumberOfCustomersWithMissingData();
+  }
+  getUpcomingReservations() {
+    return this.reservationsService.getUpcomingReservations();
+  }
+  getNumberOfNotifications() {
+    return 15;
+  }
 }

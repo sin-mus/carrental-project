@@ -1,0 +1,37 @@
+<mat-toolbar class="mat-elevation-z8" *ngIf="!toggleSearch">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  <span *ngIf="sidenav.mode === 'side'" class="logo">
+    Sinanovic
+  </span>
+
+  <div class="title-field">
+    <span class="title">{{title}}</span>
+    <span class="date">{{today | date}}</span>
+  </div>
+
+  <div class="icons-field">
+    <mat-icon matBadge="15" matBadgeColor="warn">home</mat-icon>
+  
+    <mat-icon>person</mat-icon>
+  
+    <mat-icon (click)="toggleSearch=!toggleSearch">search</mat-icon>
+  </div>
+
+
+
+</mat-toolbar>
+
+<mat-toolbar class="search-block" *ngIf="toggleSearch">
+
+  <mat-icon>search</mat-icon>
+
+  <input matInput [(ngModel)]="searchTerm" />
+
+  <mat-icon (click)="toggleSearch=!toggleSearch">close</mat-icon>
+
+</mat-toolbar>
+
+<mat-divider style="height: 3px; background-color: #7C0DFF;"></mat-divider>
