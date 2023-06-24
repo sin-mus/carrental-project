@@ -4,6 +4,7 @@ import { HeaderService } from 'src/app/shared/header/header.service';
 import { SmallGrid } from '../types/small-grid.interface';
 import { CustomersService } from 'src/app/services/customers.service';
 import { ReservationsService } from 'src/app/services/reservations.service';
+import { AdminstrationTasks, MechanicsTasks, OtherTasks, Tasks } from '../types/tasks.interface';
 
 export interface Tile {
   color: string;
@@ -21,6 +22,11 @@ export class DashboardHomeComponent implements AfterViewInit {
 
   title: string = "Home";
   smallGridLayout: SmallGrid[];
+  activeTab: string = 'administration';
+  administrationTasks: AdminstrationTasks = new AdminstrationTasks();
+  mechanicsTasks: MechanicsTasks  = new MechanicsTasks();
+  otherTasks: OtherTasks = new OtherTasks();
+  tasksArray: string[];
 
   constructor(
     private headerService: HeaderService,
@@ -67,12 +73,18 @@ export class DashboardHomeComponent implements AfterViewInit {
         color: "#00DFA2"
       }
     ]
+    this.tasksArray = this.administrationTasks.getTasks();
   }
   
   ngAfterViewInit(): void {
     this.headerService.changeHeaderTitle(this.title);
   }
- 
+
+  changeTasks(tasks: Tasks) {
+    this.activeTab = tasks.type;
+    this.tasksArray = tasks.getTasks();
+  }
+
   getCarsInOperation(): number {
     return this.carService.getCarsInOperation();
   }
@@ -89,3 +101,4 @@ export class DashboardHomeComponent implements AfterViewInit {
     return 15;
   }
 }
+

@@ -38,6 +38,57 @@
     margin-right: 15px;
     float: left;
 }
+.card [class*=card-header-]:not(.card-header-icon):not(.card-header-text):not(.card-header-image) {
+    border-radius: 3px;
+    margin-top: -20px;
+    padding: 15px;
+}
+.card .card-header-primary .card-icon, .card .card-header-primary .card-text, .card .card-header-primary:not(.card-header-icon):not(.card-header-text), .card.bg-primary, .card.card-rotate.bg-primary .back, .card.card-rotate.bg-primary .front {
+    background: linear-gradient(60deg,#ab47bc,#8e24aa);
+}
+.card .card-header.card-header-tabs .nav-tabs-title {
+    color: white;
+    float: left;
+    padding: 10px 10px 10px 0;
+    line-height: 24px;
+}
+.card .card-header.card-header-tabs .nav-tabs {
+    background: 0 0;
+    padding: 0;
+}
+.nav-tabs {
+    border: 0;
+    border-radius: 3px;
+}
+.nav-tabs .nav-item {
+    margin-bottom: -1px;
+}
+.nav-tabs .nav-item .nav-link.active {
+    background-color: rgba(255,255,255,.2);
+    transition: .3s background-color .2s;
+}
+.nav-tabs .nav-item .nav-link, .nav-tabs .nav-item .nav-link:focus, .nav-tabs .nav-item .nav-link:hover {
+    border: 0!important;
+    color: #fff!important;
+    font-weight: 500;
+}
+.nav-tabs .nav-item .nav-link {
+    margin: 0;
+    border-radius: 3px;
+    line-height: 24px;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 10px 15px;
+}
+.mat-button-focus-overlay, .mat-button-ripple.mat-ripple {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    pointer-events: none;
+    border-radius: inherit;
+}
 
 .card .card-header-warning .card-icon,
 .card .card-header-warning .card-text,
@@ -133,6 +184,27 @@ a {
 a:hover{
     color: black;
 }
-.ct-chart{
-    width: 100%;
+mat-list-item .icons{
+    display: inline;
+    position: absolute;
+    right: 2px;
+}
+mat-list-item .icons i{
+    margin-left: 10px;
+    cursor: pointer;
+}
+mat-list-item .icons i:hover{
+    opacity: 0.5;
+}
+.card .card-header-warning .card-icon, .card .card-header-warning .card-text, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card.bg-warning, .card.card-rotate.bg-warning .back, .card.card-rotate.bg-warning .front {
+    background: linear-gradient(60deg,#ffa726,#fb8c00);
+}
+.card [class*=card-header-]:not(.card-header-icon):not(.card-header-text):not(.card-header-image) {
+    border-radius: 3px;
+    margin-top: -20px;
+    padding: 15px;
+}
+.card [class*=card-header-] {
+    margin: 0 15px;
+    position: relative;
 }
