@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <div class="grid-layout">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let item of smallGridLayout">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div [ngStyle]="{'background' : item.color}" class="card-icon">
+                            <i [className]="item.icon"></i>
+                        </div>
+                        <p class="card-category">{{item.category}}</p>
+                        <h3 class="card-title">
+                            <strong style="font-size: 34px;">{{ item.title }}</strong>
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i [className]="item.warningIcon"></i>
+                            <a [routerLink]="item.link">{{item.linkText}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

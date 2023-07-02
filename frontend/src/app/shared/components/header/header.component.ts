@@ -15,17 +15,13 @@ export class HeaderComponent {
 
   today: number = Date.now();
 
-  // this property will be dynamically changed using page-title directive
-  title: string;
+  // this property will be dynamically changed 
+  pageTitle: string;
 
   constructor(private pageTitleService: PageTitleService) {
-    this.title = "Default title";
+    this.pageTitleService.titleChanged.subscribe(title => {
+      this.pageTitle = title;
+    })
    }
-
-  ngOnInit() {
-    this.pageTitleService.getPageTitle().subscribe(title => {
-      this.title = title;
-    });
-  }
 
 }

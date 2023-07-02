@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-header card-header-tabs card-header-primary">
+        <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+                <span class="nav-tabs-title">Tasks:</span>
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                    <li class="nav-item">
+                        <a mat-button [ngClass]="activeTab === 'administration' ? 'active' : ''"
+                            class="nav-link" data-toggle="tab" (click)="changeTasks('administration')">
+                            <i class="fa-solid fa-file-circle-exclamation"></i> Administration
+                            <div class="ripple-container"></div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a mat-button [ngClass]="activeTab === 'mechanics' ? 'active' : ''" class="nav-link"
+                            data-toggle="tab" (click)="changeTasks('mechanics')">
+                            <i class="fa-solid fa-wrench"></i> Mechanics
+                            <div class="ripple-container"></div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a mat-button [ngClass]="activeTab === 'other' ? 'active' : ''" class="nav-link"
+                            data-toggle="tab" (click)="changeTasks('other')">
+                            <i class="fa-light fa-face-eyes-xmarks"></i> Other
+                            <div class="ripple-container"></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card-body" *ngIf="tasks">
+        <mat-list>
+            <mat-list-item *ngFor="let task of tasks; index as i">
+                {{task.name}}
+                <div class="icons">
+                    <i class="fa-solid fa-trash" style="color: red;"></i>
+                    <i (click)="openEditDialog(task)" class="fa-solid fa-pen-to-square"></i>
+                </div>
+            </mat-list-item>
+        </mat-list>
+        <mat-paginator 
+        [length]="theTotalElements"
+        [pageSize]="thePageSize"
+        [pageSizeOptions]="[5, 10]"
+        aria-label="Select page">
+</mat-paginator>
+    </div>
+</div>

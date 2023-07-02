@@ -10,13 +10,13 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider';
-import { PageTitleDirective } from '../directives/page-title.directive';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
     LayoutComponent,
-    HeaderComponent,
-    PageTitleDirective
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +25,10 @@ import { PageTitleDirective } from '../directives/page-title.directive';
     MatIconModule,
     MatToolbarModule,
     MatDividerModule,
+    MatButtonModule,
     FormsModule
+  ],
+  exports:[
   ]
 })
 export class ComponentsModule { }

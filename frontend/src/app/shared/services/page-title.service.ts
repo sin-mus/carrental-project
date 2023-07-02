@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -6,14 +6,13 @@ import { Subject } from 'rxjs';
 })
 export class PageTitleService {
 
-  private pageTitleSubject: Subject<string> = new Subject<string>();
+  private defaultTitle: string = "My App";
+  titleChanged: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
+  setTitle(title: string) {
+    const fullTitle = title ? `${title} | ${this.defaultTitle}` : this.defaultTitle;
+    document.title = fullTitle;
+    this.titleChanged.emit(title);
+  }
 
-  setPageTitle(title: string) {
-    this.pageTitleSubject.next(title);
-  }
-  getPageTitle() {
-    return this.pageTitleSubject.asObservable();
-  }
 }
