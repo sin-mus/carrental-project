@@ -1,10 +1,15 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CarsService } from 'src/app/services/cars.service';
 import { HeaderService } from 'src/app/shared/header/header.service';
 import { SmallGrid } from '../types/small-grid.interface';
 import { CustomersService } from 'src/app/services/customers.service';
 import { ReservationsService } from 'src/app/services/reservations.service';
-import { AdminstrationTasks, MechanicsTasks, OtherTasks, Tasks } from '../types/tasks.interface';
+import { Task } from '../types/task.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskEditDialogComponent } from 'src/app/components/task-edit-dialog/task-edit-dialog.component';
+import { TasksService } from 'src/app/services/tasks.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
 
 export interface Tile {
   color: string;
@@ -18,21 +23,20 @@ export interface Tile {
   templateUrl: './dashboard-home.component.html',
   styleUrls: ['./dashboard-home.component.css']
 })
-export class DashboardHomeComponent implements AfterViewInit {
+export class DashboardHomeComponent implements OnInit {
 
   title: string = "Home";
   smallGridLayout: SmallGrid[];
-  activeTab: string = 'administration';
-  administrationTasks: AdminstrationTasks = new AdminstrationTasks();
-  mechanicsTasks: MechanicsTasks  = new MechanicsTasks();
-  otherTasks: OtherTasks = new OtherTasks();
-  tasksArray: string[];
+
 
   constructor(
+    private dialog: MatDialog,
     private headerService: HeaderService,
     private carService: CarsService,
     private customersService: CustomersService,
-    private reservationsService: ReservationsService
+    private reservationsService: ReservationsService,
+    private tasksService: TasksService,
+    private route: ActivatedRoute
   ) {
     this.smallGridLayout = [
       {
@@ -73,16 +77,10 @@ export class DashboardHomeComponent implements AfterViewInit {
         color: "#00DFA2"
       }
     ]
-    this.tasksArray = this.administrationTasks.getTasks();
-  }
-  
-  ngAfterViewInit(): void {
-    this.headerService.changeHeaderTitle(this.title);
   }
 
-  changeTasks(tasks: Tasks) {
-    this.activeTab = tasks.type;
-    this.tasksArray = tasks.getTasks();
+  ngOnInit(): void {
+    this.headerService.changeHeaderTitle(this.title);
   }
 
   getCarsInOperation(): number {

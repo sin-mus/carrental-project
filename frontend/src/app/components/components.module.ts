@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
-import { NgChartsModule } from 'ng2-charts';
+import { TaskEditDialogComponent } from './task-edit-dialog/task-edit-dialog.component';
+import { FormsModule } from '@angular/forms';
+import { TaskTabComponent } from './task-tab/task-tab.component';
+import { CustomMaterialModule } from '../custom-material/custom-material/custom-material.module';
 
 
 
@@ -10,13 +13,17 @@ import { NgChartsModule } from 'ng2-charts';
   imports: [
     CommonModule,
     RouterModule,
-    NgChartsModule
+    FormsModule,
+    CustomMaterialModule
   ],
   declarations: [
-    FooterComponent
+    FooterComponent,
+    TaskEditDialogComponent,
+    TaskTabComponent
   ],
   exports: [
-    FooterComponent
+    FooterComponent, 
+    TaskTabComponent
   ]
 })
 export class ComponentsModule { }

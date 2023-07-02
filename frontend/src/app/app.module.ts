@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { CustomMaterialModule } from './custom-material/custom-material/custom-material.module';
 import { SharedModule } from './shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -21,7 +22,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     CustomMaterialModule.forRoot(),
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

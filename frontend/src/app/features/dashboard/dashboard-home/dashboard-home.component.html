@@ -27,54 +27,11 @@
 
 <div class="row">
     <div class="col-lg-6 col-md-12">
-        <div class="card">
-            <div class="card-header card-header-tabs card-header-primary">
-                <div class="nav-tabs-navigation">
-                    <div class="nav-tabs-wrapper">
-                        <span class="nav-tabs-title">Tasks:</span>
-                        <ul class="nav nav-tabs" data-tabs="tabs">
-                            <li class="nav-item">
-                                <a mat-button (click)="changeTasks(administrationTasks)"
-                                    [ngClass]="activeTab === 'administration' ? 'active' : ''" class="nav-link"
-                                    data-toggle="tab">
-                                    <i class="fa-solid fa-file-circle-exclamation"></i> Administration
-                                    <div class="ripple-container"></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a mat-button (click)="changeTasks(mechanicsTasks)"
-                                    [ngClass]="activeTab === 'mechanics' ? 'active' : ''" class="nav-link"
-                                    data-toggle="tab">
-                                    <i class="fa-solid fa-wrench"></i> Mechanics
-                                    <div class="ripple-container"></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a mat-button 
-                                (click)="changeTasks(otherTasks)"
-           [ngClass]="activeTab === 'other' ? 'active' : ''"
-                                class="nav-link" 
-                                data-toggle="tab">
-                                    <i class="fa-light fa-face-eyes-xmarks"></i> Other
-                                    <div class="ripple-container"></div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <mat-list>
-                    <mat-list-item *ngFor="let task of tasksArray">
-                        {{task}}
-                        <div class="icons">
-                            <i class="fa-solid fa-trash" style="color: red;"></i>
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </div>
-                    </mat-list-item>
-                </mat-list>
-            </div>
-        </div>
+        
+
+        <!--- TASK TAB -->
+        <app-task-tab></app-task-tab>
+
     </div>
     <div class="col-lg-6 col-md-12">
         <div class="card">
