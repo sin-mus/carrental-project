@@ -1,11 +1,19 @@
 package com.cars_project.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.management.relation.Role;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "staff")
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
