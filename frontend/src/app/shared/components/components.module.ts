@@ -11,12 +11,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 @NgModule({
   declarations: [
     LayoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    ForbiddenComponent
   ],
   imports: [
     CommonModule,
