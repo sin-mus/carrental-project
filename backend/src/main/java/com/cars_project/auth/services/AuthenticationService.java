@@ -4,19 +4,24 @@ import com.cars_project.auth.AuthenticationRequest;
 import com.cars_project.auth.AuthenticationResponse;
 import com.cars_project.auth.RegisterRequest;
 import com.cars_project.auth.jwt.JwtService;
-import com.cars_project.users.User;
-import com.cars_project.users.UserRepository;
+import com.cars_project.auth.users.User;
+import com.cars_project.auth.users.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.cars_project.users.Role;
+import com.cars_project.auth.users.Role;
+
+import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
 
+    @Value("${mustafa.app.tokenExpiration}")
+    private Long TOKEN_EXPIRATION;
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -51,6 +56,7 @@ public class AuthenticationService {
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .expiresIn(TOKEN_EXPIRATION)
                 .build();
     }
 }

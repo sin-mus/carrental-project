@@ -1,4 +1,4 @@
-package com.cars_project.users;
+package com.cars_project.auth.users;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,7 +1,7 @@
 package com.cars_project.config;
 
 
-import com.cars_project.users.UserRepository;
+import com.cars_project.auth.users.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
