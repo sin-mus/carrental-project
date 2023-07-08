@@ -56,7 +56,6 @@ public class AuthenticationService {
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
-                .expiresIn(TOKEN_EXPIRATION)
                 .build();
     }
 }
