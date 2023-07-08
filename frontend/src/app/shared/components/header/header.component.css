@@ -79,6 +79,7 @@ mat-icon {
 .icons-field mat-icon {
     font-size: 30px;
     margin: 0 25px;
+    width: auto;
 }
 
 @keyframes example {

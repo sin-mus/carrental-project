@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs';
-import { AuthService } from 'src/app/core/services/auth.service';
+
+import { AlertService } from 'src/app/core/services/alert.service';
+import { ApiService } from 'src/app/core/services/api.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -10,47 +13,51 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  loginForm: FormGroup;
-  submitted: boolean;
-  loading: boolean;
-  returnUrl: any;
-  error: any;
+  form!: FormGroup;
+  loading = false;
+  submitted = false;
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private formBuilder: FormBuilder) { }
+      private formBuilder: FormBuilder,
+      private authService: ApiService,
+      private alertService: AlertService,
+      private router: Router,
+      private storage: LocalStorageService
+  ) { }
 
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(2)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
+  ngOnInit() {
+      this.form = this.formBuilder.group({
+          username: ['', Validators.required],
+          password: ['', Validators.required]
+      });
   }
 
-  get f() { return this.loginForm.controls; }
+  // convenience getter for easy access to form fields
+  get f() { return this.form.controls; }
 
-  login(userName: string, password: string) {
+  onSubmit() {
+      this.submitted = true;
 
-    this.router.navigateByUrl('/dashboard');
+      // reset alerts on submit
+      this.alertService.clear();
 
-  }
+      // stop here if form is invalid
+      if (this.form.invalid) {
+          return;
+      }
 
-  onSubmit(values) {
 
-    let username = values.username;
-    let password = values.password;
-
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return console.log('Login Form Invalid');
-    }
-    this.loading = true;
-
-    this.authService.login(username, password)
-
+      this.authService.login(this.f['username'].value, this.f['password'].value)
+      .pipe(first())
+            .subscribe({
+                next: (res) => {
+                    this.storage.set("token", res['token']);
+                    this.router.navigateByUrl('home');
+                },
+                error: error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                }
+            });
   }
 }

@@ -4,7 +4,7 @@
       <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
     </button>
     <span *ngIf="sidenav.mode === 'side'" class="logo">
-      Sinanovic
+      LOGO
     </span>
   
     <div class="title-field">
@@ -13,12 +13,31 @@
       <span class="date">{{today | date}}</span>
     </div>
   
-    <div class="icons-field">
-      <mat-icon matBadge="15" matBadgeColor="warn">home</mat-icon>
+    <div 
+    class="icons-field"
+    *ngIf="sidenav.mode === 'side'">
+    <mat-icon 
+    matBadge="15" 
+    matBadgeColor="warn"
+    routerLink="/home"
+    >home</mat-icon>
     
-      <mat-icon>person</mat-icon>
+    <mat-icon (click)="toggleSearch=!toggleSearch">search</mat-icon>
+
+    <mat-icon *ngIf="isLoggedIn">person</mat-icon>
+
+    <button 
+    mat-raised-button 
+    (click)="logout()"
+    *ngIf="isLoggedIn"
+    >Log out</button>
+
+    <button 
+    mat-raised-button 
+    routerLink="/auth/login"
+    *ngIf="!isLoggedIn"
+    >Log in</button>
     
-      <mat-icon (click)="toggleSearch=!toggleSearch">search</mat-icon>
     </div>
   
   

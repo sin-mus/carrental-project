@@ -13,9 +13,6 @@ import {MatListModule} from '@angular/material/list';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { SharedModule } from "../../shared/shared.module";
 
-
-
-
 @NgModule({
     declarations: [
         HomeComponent,

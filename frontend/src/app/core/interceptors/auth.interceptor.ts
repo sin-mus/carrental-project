@@ -7,6 +7,7 @@ import {
   HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 const TOKEN_HEADER_KEY = "Authorization";
 
@@ -14,15 +15,15 @@ const TOKEN_HEADER_KEY = "Authorization";
 export class AuthInterceptor implements HttpInterceptor {
 
   
-  constructor() {}
+  constructor(private authService: AuthService) {}
   
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    const token = localStorage.getItem("token");
+    const token = this.authService.getJWTToken();
 
     if(token){
       const cloned = request.clone({
-        headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token),
+        headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token)
       });
 
       return next.handle(cloned);
