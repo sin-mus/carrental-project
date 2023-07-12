@@ -20,8 +20,9 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    @Value("${mustafa.app.tokenExpiration}")
+    @Value("${application.security.jwt.expiration}")
     private Long TOKEN_EXPIRATION;
+
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -40,6 +41,10 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .role(user.getRole())
+                .exp(jwtService.extractExpiration(jwtToken))
                 .build();
     }
 
@@ -56,6 +61,10 @@ public class AuthenticationService {
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .role(user.getRole())
+                .exp(jwtService.extractExpiration(jwtToken))
                 .build();
     }
 }
