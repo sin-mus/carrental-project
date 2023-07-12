@@ -2,10 +2,12 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
+    <img class="avatar mat-elevation-z8" src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" />
 
-    <h4 class="name">John Smith</h4>
-    <p class="designation">Software Engineer</p>
+
+
+    <h4 *ngIf="(fullName$ | async) as fullName" class="name">{{ fullName }}</h4>
+    <p *ngIf="(role$ | async) as role" class="designation">{{ role }}</p>
 
     <div class="divider"></div>
 
@@ -13,7 +15,7 @@
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/profile">
+    <button *ngIf="(id$ | async) as id" mat-button class="menu-button" routerLink="/user/${{id}}">
       <mat-icon>person</mat-icon>
       <span>Profile</span>
     </button>
@@ -44,15 +46,50 @@
       <mat-icon>help</mat-icon>
       <span>Help</span>
     </button>
+      
+
+    <div *ngIf="!(loginStatus$ | async) as loginStatus">
+      <button 
+      *ngIf="loginStatus"
+      mat-button 
+      class="menu-button" 
+      routerLink="/auth/login">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </button>
+    </div>
+
+    <div *ngIf="!(loginStatus$ | async) as loginStatus">
+      <button 
+      *ngIf="loginStatus"
+      mat-button 
+      class="menu-button" 
+      routerLink="/auth/register">
+        <mat-icon>supervisor_account</mat-icon>
+        <span>Register</span>
+      </button>
+    </div>
+
+    <div *ngIf="(loginStatus$ | async) as loginStatus">
+      <button 
+      *ngIf="loginStatus"
+      mat-button 
+      class="menu-button" 
+      (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z8" style="background-color: #A1C2F1;">
 
 
       <!-- ROUTER OUTLET --- YOUR CONTENT -->
-      
+
       <router-outlet></router-outlet>
-      
+
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

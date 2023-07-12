@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { first } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -28,9 +26,11 @@ export class RegisterComponent implements OnInit {
           firstName: ['', Validators.required],
           lastName: ['', Validators.required],
           email: ['', Validators.required],
-          password: ['', [Validators.required, Validators.minLength(6)]]
-      });
-  }
+          password: ['', [Validators.required, Validators.minLength(6)]],
+          confirmPassword: [''],
+          agreeTerm : [false, Validators.required]
+      }, { validators: this.checkPasswords })};
+  
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
@@ -48,17 +48,38 @@ export class RegisterComponent implements OnInit {
 
       this.loading = true;
       this.authService.register(this.form.value)
-          .pipe(first())
           .subscribe({
               next: () => {
                   this.alertService.success('Registration successful', { keepAfterRouteChange: true });
                   this.router.navigateByUrl('login');
               },
-              error: error => {
-                  this.alertService.error(error);
+              error: errors => {
+                  this.alertService.error(errors);
                   this.loading = false;
               }
           });
   }
 
+  checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { 
+    let pass = group.get('password').value;
+    let confirmPass = group.get('confirmPassword').value
+    return pass === confirmPass ? null : { notSame: true }
+  }
+
+  togglePassword(): void {
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+    const toggleButton = document.getElementById('toggle_button');
+  
+    if (passwordInput && toggleButton) {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleButton.classList.remove('fa-eye');
+        toggleButton.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        toggleButton.classList.remove('fa-eye-slash');
+        toggleButton.classList.add('fa-eye');
+      }
+    }
+  }
 }

@@ -2,8 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { delay, filter } from 'rxjs';
+import { Observable, delay, filter } from 'rxjs';
 import { BreakpointObserver} from '@angular/cdk/layout';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @UntilDestroy()
 @Component({
@@ -14,11 +15,22 @@ import { BreakpointObserver} from '@angular/cdk/layout';
 export class LayoutComponent {
   @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
 
+  loginStatus$: Observable<boolean>;
+  fullName$: Observable<String>;
+  role$: Observable<String>;
+  id$: Observable<number>;
+
   constructor(
     private observer: BreakpointObserver,
-    private router: Router) { }
+    private router: Router,
+    private authService: AuthService) { 
 
-  ngAfterViewInit() {
+      this.loginStatus$ = this.authService.isLoggedIn();
+      this.fullName$ = this.authService.getFullName();
+      this.role$ = this.authService.getCurrentUserRole();
+    }
+
+  ngAfterViewInit(): void {
     this.observer
       .observe(['(max-width: 800px)'])
       .pipe(delay(1), untilDestroyed(this))
@@ -42,8 +54,15 @@ export class LayoutComponent {
           this.sidenav.close();
         }
       });
+  }
 
 
+  isLoggedIn(){
+    return this.authService.isLoggedIn();
+  }
+
+  logout(){
+    this.authService.logout();
   }
 
 }

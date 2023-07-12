@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PageTitleService } from '../../services/page-title.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Observable } from 'rxjs';
 
 
 
@@ -14,12 +15,24 @@ export class HeaderComponent implements OnInit{
   toggleSearch: boolean = false;
   searchTerm: string;
 
-  today: number = Date.now();
+  loginStatus$: Observable<boolean>;
+  fullName$: Observable<String>;
+  role$: Observable<String>;
 
+  today: number = Date.now();
+  
   // this property will be dynamically changed 
   pageTitle: string;
+  
 
-  isLoggedIn: boolean;
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.loginStatus$ = this.authService.isLoggedIn();
+    this.fullName$ = this.authService.getFullName();
+    this.role$ = this.authService.getCurrentUserRole();
+  }
 
   constructor(
     private pageTitleService: PageTitleService,
@@ -30,12 +43,6 @@ export class HeaderComponent implements OnInit{
     })
 
   }
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.isLoggedIn = this.authService.isLoggedIn();
-  }
-
 
    logout(){
     this.authService.logout();

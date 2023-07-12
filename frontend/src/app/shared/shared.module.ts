@@ -10,14 +10,14 @@ import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
-    FooterComponent
+
   ],
   imports: [
     CommonModule,
     ComponentsModule
   ],
   exports: [
-    FooterComponent
+    ComponentsModule
   ]
 })
 export class SharedModule { }

@@ -19,7 +19,11 @@ export class AuthInterceptor implements HttpInterceptor {
   
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    const token = this.authService.getJWTToken();
+    let token = this.authService.getJWTToken();
+
+    if (token) {
+      token = token.replace(/^"(.*)"$/, '$1');
+  }
 
     if(token){
       const cloned = request.clone({

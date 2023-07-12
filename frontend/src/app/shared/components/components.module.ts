@@ -19,7 +19,8 @@ import { FooterComponent } from './footer/footer.component';
   declarations: [
     LayoutComponent,
     HeaderComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +33,7 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule
   ],
   exports:[
-    HeaderComponent
+    FooterComponent
   ]
 })
 export class ComponentsModule { }

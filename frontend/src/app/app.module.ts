@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorProvider } from './core/interceptors/auth.interceptor';
-import { AuthService } from './core/services/auth.service';
 
 @NgModule({
   declarations: [
